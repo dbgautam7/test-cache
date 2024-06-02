@@ -33,8 +33,38 @@ const setWatchHistory = async (watchHistory, userId) => {
     })
 
 }
+// const setWatchHistory = async (watchHistory, userId) => {
+//     const key = `users:${userId}`;
+//     // Check if the key exists
+//     const keyExists = await redisClient.exists(key);
+//     console.log(keyExists, "keyExists");
+
+//     if (!keyExists) {
+//         // Serialize the watchHistory object and set it in Redis
+//         await redisClient.set(key, JSON.stringify(watchHistory));
+//         return;
+//     }
+
+//     // Retrieve the existing user data and deserialize it
+//     const userData = await redisClient.get(key);
+//     const parsedUserData = JSON.parse(userData);
+
+//     // Update the watchHistory field with the new data
+//     const updatedData = {
+//         ...parsedUserData,
+//         watchHistory: {
+//             ...parsedUserData.watchHistory,
+//             ...watchHistory
+//         }
+//     };
+
+//     // Serialize the updated data and set it back in Redis
+//     await redisClient.set(key, JSON.stringify(updatedData));
+// };
 
 const handleCache = async () => {
+    const parse = await redisClient.get('doc')
+    console.log(JSON.parse(parse), "dco")
     try {
         await redisClient.flushDb()
         await setUpGears()

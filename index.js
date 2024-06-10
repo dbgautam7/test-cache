@@ -11,7 +11,7 @@ const setUpGears = async () => {
         ...requirements,
     ]
     try {
-        await redisClient.sendCommand(params)
+        await redisClient?.sendCommand(params)
         console.log('Redis gears write behind setup completed');
     } catch (err) {
         console.log('Redis gears write behind setup failed', err);
@@ -68,10 +68,10 @@ const handleCache = async () => {
     try {
         await redisClient.flushDb()
         await setUpGears()
-        const userId = '1234'
+        // const userId = '1234'
 
-        await setWatchHistory({ 1: 10 }, userId)
-        await setWatchHistory({ 2: 20 }, userId)
+        // await setWatchHistory({ 1: 10 }, userId)
+        // await setWatchHistory({ 2: 20 }, userId)
         // process.exit()
     } catch (error) {
         console.log(error, "error====");
